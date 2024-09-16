@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     <Auth0Provider
       domain="whai-2024-nathan.au.auth0.com"
-      clientId="B0ASzH8SeoJW2Eidfn6oSfi0uJa21Uur"
+      clientId="ufI7CEynyO8uvPpAYEyiNbduMJpmDUSS"
       authorizationParams={{
         redirect_uri: window.location.origin,
         audience: '',
