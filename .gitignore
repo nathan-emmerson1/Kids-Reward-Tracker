@@ -1,5 +1,5 @@
 # Node modules
-node_modules
+/node_modules
 
 # Logs
 *.log
@@ -11,10 +11,7 @@ node_modules
 /dist
 
 # Jest coverage report
-coverage/*
+/coverage/*
 
 # Dotenv env settings
 .env
-
-# Build directory
-/dist
