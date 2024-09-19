@@ -26,3 +26,5 @@ router.get('/:id', checkJwt, async (req, res) => {
     res.status(500).json({ messege: 'error geting kids by id' })
   }
 })
+
+export default router

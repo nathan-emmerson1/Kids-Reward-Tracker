@@ -29,3 +29,5 @@ router.get('/:id', checkJwt, async (req, res) => {
     res.status(500).json({ messege: 'Error getting user By id' })
   }
 })
+
+export default router

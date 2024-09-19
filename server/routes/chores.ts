@@ -25,3 +25,5 @@ router.get('/:id', checkJwt, async (req, res) => {
     res.status(500).json({ messege: 'error getting by id chore' })
   }
 })
+
+export default router
