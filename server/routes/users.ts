@@ -3,8 +3,8 @@ import checkJwt, { JwtRequest } from '../auth0'
 import { StatusCodes } from 'http-status-codes'
 import * as db from '../db/functions/users'
 import * as children from '../db/functions/children'
-import { AddChore } from '../db/functions/chores'
-import { addReward } from '../db/functions/rewards'
+import { AddChore, deleteChore } from '../db/functions/chores'
+import { addReward, deleteReward } from '../db/functions/rewards'
 
 const router = Router()
 
@@ -50,7 +50,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
   }
 })
 
-router.post('/', checkJwt, async (req: JwtRequest, res) => {
+router.post('/addchore', checkJwt, async (req: JwtRequest, res) => {
   try {
     const { name, description, frequency, createdAt, updatedAt } = req.body
     const id = await AddChore({
@@ -68,7 +68,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
   }
 })
 
-router.post('/', checkJwt, async (req: JwtRequest, res) => {
+router.post('/addreward', checkJwt, async (req: JwtRequest, res) => {
   try {
     const { name, description, pointsRequired, createdAt, updatedAt } = req.body
     const id = await addReward({
@@ -86,4 +86,26 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
   }
 })
 
+router.delete('/removereward/:id', checkJwt, async (req, res) => {
+  try {
+    const id = Number(req.params)
+    const reward = await deleteReward(id)
+    res.json(reward)
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+router.delete('/removechore/:id', checkJwt, async (req, res) => {
+  try {
+    const id = Number(req.params.id)
+    const removed = await deleteChore(id)
+    if (removed) {
+      res.sendStatus(StatusCodes.NO_CONTENT)
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ messege: 'error removing chore' })
+  }
+})
 export default router

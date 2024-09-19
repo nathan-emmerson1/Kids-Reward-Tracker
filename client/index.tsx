@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clientId="ufI7CEynyO8uvPpAYEyiNbduMJpmDUSS"
       authorizationParams={{
         redirect_uri: window.location.origin,
-        audience: '',
+        audience: 'https://kidsreward/api',
       }}
     >
       <QueryClientProvider client={queryClient}>

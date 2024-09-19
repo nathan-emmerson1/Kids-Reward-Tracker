@@ -6,7 +6,7 @@ import jwks from 'jwks-rsa'
 
 // TODO: set the domain and audience (API Identifier)
 const domain = 'https://whai-2024-nathan.au.auth0.com'
-const audience = 'https://https://kidsreward/api'
+const audience = 'https://kidsreward/api'
 
 const checkJwt = jwt({
   secret: jwks.expressJwtSecret({
