@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', checkJwt, async (req, res) => {
   try {
     const id = Number(req.params)
     const user = await db.getUserById(id)
@@ -29,5 +29,3 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ messege: 'Error getting user By id' })
   }
 })
-
-// router.post('/', checkJwt, async (req: JwtRequest, res, ))
