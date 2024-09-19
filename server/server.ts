@@ -12,9 +12,9 @@ const server = express()
 server.use(express.json())
 
 server.use('/api/v1/fruits', fruitRoutes)
-server.use('/api/v1/user', userRoutes)
+server.use('/api/v1/users', userRoutes)
 server.use('/api/v1/children', childrenRoutes)
-server.use('/api/v1/chore', choreRoutes)
+server.use('/api/v1/chores', choreRoutes)
 server.use('/api/v1/rewards', rewardsRoutes)
 
 if (process.env.NODE_ENV === 'production') {

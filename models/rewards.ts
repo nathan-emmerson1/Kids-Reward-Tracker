@@ -3,6 +3,14 @@ export interface Reward {
   name: string
   description: string
   points_required: number
-  created_at: Date
-  updated_at: Date
+  createdAt: Date
+  updatedAt: Date
+}
+
+export interface RewardData {
+  name: string
+  description: string
+  pointsRequired: number
+  createdAt: Date
+  updatedAt: Date
 }

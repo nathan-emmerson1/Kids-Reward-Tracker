@@ -6,3 +6,11 @@ export interface Chore {
   created_at: Date // Timestamp for when the record was created
   updated_at: Date // Timestamp for when the record was last updated
 }
+
+export interface ChoreData {
+  name: string
+  description: string
+  frequency: 'daily' | 'weekly' | 'monthly'
+  createdAt: Date
+  updatedAt: Date
+}
