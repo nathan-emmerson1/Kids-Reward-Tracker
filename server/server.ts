@@ -13,6 +13,9 @@ server.use(express.json())
 
 server.use('/api/v1/fruits', fruitRoutes)
 server.use('/api/v1/user', userRoutes)
+server.use('/api/v1/children', childrenRoutes)
+server.use('/api/v1/chore', choreRoutes)
+server.use('/api/v1/rewards', rewardsRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))

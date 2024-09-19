@@ -7,7 +7,7 @@ const router = Router()
 
 router.use(checkJwt)
 
-router.get('/', async (req, res) => {
+router.get('/', checkJwt, async (req, res) => {
   try {
     const user = await db.getAllUser()
     res.json(user)
