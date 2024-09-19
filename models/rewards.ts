@@ -2,7 +2,7 @@ export interface Reward {
   id: number
   name: string
   description: string
-  points_required: number
+  pointsRequired: number
   createdAt: Date
   updatedAt: Date
 }

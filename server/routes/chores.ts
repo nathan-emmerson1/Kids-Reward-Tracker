@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import checkJwt from '../auth0'
 import * as db from '../db/functions/chores'
+import { StatusCodes } from 'http-status-codes'
 
 const router = Router()
 
@@ -23,6 +24,19 @@ router.get('/:id', checkJwt, async (req, res) => {
     res.json(chore)
   } catch (error) {
     res.status(500).json({ messege: 'error getting by id chore' })
+  }
+})
+
+router.delete('/:id', checkJwt, async (req, res) => {
+  try {
+    const id = Number(req.params.id)
+    const removed = await db.deleteChore(id)
+    if (removed) {
+      res.sendStatus(StatusCodes.NO_CONTENT)
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ messege: 'error removing chore' })
   }
 })
 

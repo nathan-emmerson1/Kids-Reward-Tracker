@@ -27,4 +27,14 @@ router.get('/id', checkJwt, async (req, res) => {
   }
 })
 
+router.delete('/:id', checkJwt, async (req, res) => {
+  try {
+    const id = Number(req.params)
+    const reward = await db.deleteReward(id)
+    res.json(reward)
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 export default router
