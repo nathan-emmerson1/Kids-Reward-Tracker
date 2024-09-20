@@ -1,10 +1,5 @@
-import react, {
-  useQuery,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { deleteReward, fetchAllRewards } from '../apis/rewards'
-import { fetchAllChores } from '../apis/chores'
 
 function RewardList() {
   const queryClient = useQueryClient()

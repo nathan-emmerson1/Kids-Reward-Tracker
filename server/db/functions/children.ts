@@ -12,9 +12,9 @@ export async function GetAllChildren() {
   return children as Children[]
 }
 
-export async function GetChildrenById(id: number) {
-  const children = await db('children').select().first().where({ id })
-  return children as Children
+export async function getChildrenById(id: number) {
+  const children = await db('children').where({ id }).select().first()
+  return children
 }
 
 export async function addChildren(data: ChildrenData) {

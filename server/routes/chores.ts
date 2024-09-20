@@ -5,23 +5,24 @@ import { StatusCodes } from 'http-status-codes'
 
 const router = Router()
 
-router.use(checkJwt)
-
-router.get('/', checkJwt, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const chore = await db.GetAllChores()
     res.json(chore)
+    console.log(chore)
   } catch (error) {
     console.log(error)
     res.status(500).json({ messege: 'error getting chores' })
   }
 })
 
-router.get('/:id', checkJwt, async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const id = Number(req.params)
-    const chore = await db.GetChoreById(id)
+    console.log('starting oof chore by id')
+    const id = Number(req.params.id)
+    const chore = await db.getChoreById(id)
     res.json(chore)
+    console.log(chore)
   } catch (error) {
     res.status(500).json({ messege: 'error getting by id chore' })
   }

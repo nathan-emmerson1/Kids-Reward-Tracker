@@ -3,18 +3,16 @@ import { Children, ChildrenData } from '../../models/children'
 
 const rootUrl = '/api/v1/children'
 
-export function fetchAllChildren(): Promise<Children[]> {
-  return request.get(rootUrl).then((res) => {
-    console.log(res.body)
-    return res.body
-  })
+export async function fetchAllChildren(): Promise<Children[]> {
+  const res = await request.get(rootUrl)
+  console.log(res.body)
+  return res.body
 }
 
-export function fetchChildrenById(id: number): Promise<ChildrenData> {
-  return request.get(rootUrl + `/${id}`).then((res) => {
-    console.log(res.body)
-    return res.body
-  })
+export async function fetchChildrenById(id: number): Promise<ChildrenData> {
+  const res = await request.get(rootUrl + `/${id}`)
+  console.log(res.body)
+  return res.body
 }
 
 export async function deleteChildren(id: number) {

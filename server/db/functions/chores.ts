@@ -5,15 +5,16 @@ export async function GetAllChores() {
   const chore = await db('chores').select(
     'name as name',
     'description as description',
-    'frequenct as frequenct',
+    'frequency as frequency',
     'created_at as createdAt',
     'updated_at as updatedAt',
   )
+  console.log(chore)
   return chore as Chore[]
 }
 
-export async function GetChoreById(id: number) {
-  const chore = await db('chores').select().first().where({ id })
+export async function getChoreById(id: number) {
+  const chore = await db('chores').where({ id }).select().first()
   return chore as Chore
 }
 
