@@ -20,7 +20,7 @@ export async function deleteChore(id: number) {
   return res
 }
 
-export async function AddChore(chore: ChoreData) {
-  const res = await request.post(baseUrl).send(chore)
+export async function AddChore(newChore: ChoreData) {
+  const res = await request.post(baseUrl).send(newChore)
   return res.body
 }
