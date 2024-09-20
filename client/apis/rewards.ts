@@ -16,3 +16,8 @@ export function fetchRewardById(id: number): Promise<RewardData> {
     return res.body
   })
 }
+
+export async function deleteReward(id: number) {
+  const res = await request.delete(`${baseUrl}.${id}`)
+  return res
+}
