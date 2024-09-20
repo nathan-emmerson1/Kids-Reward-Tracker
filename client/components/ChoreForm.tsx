@@ -36,6 +36,29 @@ function ChoreForm() {
       updatedAt: new Date(),
     })
   }
+
+  return (
+    <form onSubmit={handleAdd}>
+      <div>
+        <label>Name:</label>
+        <input type="text" value={newName} onChange={handleNameChange} />
+      </div>
+      <div>
+        <label>Description:</label>
+        <input type="text" value={newDescripton} onChange={handleDescriptionChange} />
+      </div>
+      <div>
+        <label>Frequency:</label>
+        <select value={newFrequency} onChange={handleFrequencyChange}>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+        </select>
+      </div>
+      <button type="submit">Add Chore</button>
+    </form>
+  )
+  )
 }
 
 export default ChoreForm

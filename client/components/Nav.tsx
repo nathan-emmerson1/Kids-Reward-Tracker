@@ -8,6 +8,7 @@ function Nav() {
   const { user, logout, loginWithRedirect } = useAuth0()
   user?.nickname
   console.log(user)
+  console.log(user?.sub)
 
   const handleSignOut = () => {
     return logout()

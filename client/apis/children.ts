@@ -19,3 +19,8 @@ export async function deleteChildren(id: number) {
   const res = await request.delete(`${rootUrl}/${id}`)
   return res
 }
+
+export async function addChildren(children: ChildrenData) {
+  const res = await request.post(rootUrl).send(children)
+  return res.body
+}
