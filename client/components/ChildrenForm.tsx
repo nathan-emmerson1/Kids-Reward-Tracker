@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import React from 'react'
+import React, { useState } from 'react'
 import { addChildren } from '../apis/children'
 import { ChildrenData } from '../../models/children'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -17,17 +17,22 @@ function ChildrenForm() {
     setNewName(e.target.value)
   }
 
-  const auth0Sub = user?.sub
-  const userId = parseInt(auth0Sub.split('|')[1])
-
   const handleChildrenAdd = (e: React.FormEvent) => {
     e.preventDefault()
-    addMutation.mutate({
-      userId: userId,
-      name: newName,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    })
+
+    if (isAuthenticated && user) {
+      const auth0Sub = user.sub
+      const userId = parseInt(auth0Sub.split('|')[1])
+
+      addMutation.mutate({
+        userId: userId,
+        name: newName,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+    } else {
+      console.error('User is not authenticated')
+    }
   }
 
   return (
@@ -40,3 +45,4 @@ function ChildrenForm() {
     </form>
   )
 }
+export default ChildrenForm

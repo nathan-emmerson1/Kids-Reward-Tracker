@@ -45,7 +45,11 @@ function ChoreForm() {
       </div>
       <div>
         <label>Description:</label>
-        <input type="text" value={newDescripton} onChange={handleDescriptionChange} />
+        <input
+          type="text"
+          value={newDescripton}
+          onChange={handleDescriptionChange}
+        />
       </div>
       <div>
         <label>Frequency:</label>
@@ -57,7 +61,6 @@ function ChoreForm() {
       </div>
       <button type="submit">Add Chore</button>
     </form>
-  )
   )
 }
 
