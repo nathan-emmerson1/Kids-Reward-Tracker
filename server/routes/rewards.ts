@@ -28,7 +28,7 @@ router.get('/id', checkJwt, async (req, res) => {
   }
 })
 
-router.post('/addreward', checkJwt, async (req: JwtRequest, res) => {
+router.post('/', checkJwt, async (req, res) => {
   try {
     const { name, description, pointsRequired, createdAt, updatedAt } = req.body
     const id = await db.addReward({
