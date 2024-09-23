@@ -14,7 +14,7 @@ export async function GetAllRewards() {
 }
 
 export async function GetRewardById(id: number) {
-  const reward = await db('rewards').select().first().where({ id })
+  const reward = await db('rewards').where({ id }).select().first()
   return reward as Reward
 }
 
@@ -25,5 +25,6 @@ export async function addReward(data: RewardData) {
 
 export async function deleteReward(id: number) {
   const removed = await db('rewards').where({ id }).delete()
+  console.log(removed)
   return removed
 }

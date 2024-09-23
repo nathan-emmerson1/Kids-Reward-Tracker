@@ -21,6 +21,6 @@ export async function addReward(reward: RewardData) {
 }
 
 export async function deleteReward(id: number) {
-  const res = await request.delete(`${baseUrl}.${id}`)
+  const res = await request.delete(`${baseUrl}/${id}`)
   return res
 }

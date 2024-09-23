@@ -11,7 +11,7 @@ function RewardForm() {
   const addMutation = useMutation({
     mutationFn: (newReward: RewardData) => addReward(newReward),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['reward'] })
+      queryClient.invalidateQueries({ queryKey: ['rewards'] })
       setNewName('')
       setNewDescription('')
       setNewPoints(0)

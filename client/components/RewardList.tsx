@@ -5,7 +5,7 @@ function RewardList() {
   const queryClient = useQueryClient()
   const deleteMutation = useMutation({
     mutationFn: (id: number) => deleteReward(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['chore'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['rewards'] }),
   })
 
   const {
@@ -29,7 +29,9 @@ function RewardList() {
       <ul>
         {rewards?.map((reward) => (
           <li key={reward.id}>
-            {reward.name}
+            <div>Name:{reward.name} </div>
+            <div>Description:{reward.description} </div>
+            <div>Ponts Required{reward.pointsRequired} </div>
             <button onClick={() => handleDelete(reward.id)}>Delete</button>
           </li>
         ))}
