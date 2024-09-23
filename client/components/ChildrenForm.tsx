@@ -23,6 +23,7 @@ function ChildrenForm() {
     if (isAuthenticated && user) {
       const auth0Sub = user.sub
       const userId = parseInt(auth0Sub.split('|')[1])
+      console.log(userId)
 
       addMutation.mutate({
         userId: userId,

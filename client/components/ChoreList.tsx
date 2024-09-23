@@ -6,14 +6,14 @@ function ChoreList() {
   const queryClient = useQueryClient()
   const deleteMutation = useMutation({
     mutationFn: (id: number) => deleteChore(id),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['chore'] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['chores'] }),
   })
   const {
     data: chores,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ['chore'],
+    queryKey: ['chores'],
     queryFn: () => fetchAllChores(),
   })
   if (isLoading) return <p>Looading...</p>

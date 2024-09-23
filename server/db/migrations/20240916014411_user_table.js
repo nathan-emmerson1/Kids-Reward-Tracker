@@ -4,6 +4,7 @@
 export async function up(knex) {
   return knex.schema.createTable('users', (table) => {
     table.increments('id').primary()
+    table.integer('auth_id').notNullable().unique()
     table.string('email').notNullable().unique()
     table.string('name').notNullable()
     table.timestamps(true, true)

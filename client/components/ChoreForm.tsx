@@ -8,11 +8,16 @@ function ChoreForm() {
   const [newFrequency, setNewFrequency] = useState<
     'daily' | 'weekly' | 'monthly'
   >('daily')
-  const [newDescripton, setNewDescription] = useState('')
+  const [newDescription, setNewDescription] = useState('')
   const queryClient = useQueryClient()
   const addMutation = useMutation({
     mutationFn: (newChore: ChoreData) => AddChore(newChore),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['chores'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['chores'] })
+      setNewName('')
+      setNewDescription('')
+      setNewFrequency('daily')
+    },
   })
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewDescription(e.target.value)
@@ -30,7 +35,7 @@ function ChoreForm() {
     e.preventDefault()
     addMutation.mutate({
       name: newName,
-      description: newDescripton,
+      description: newDescription,
       frequency: newFrequency,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -47,7 +52,7 @@ function ChoreForm() {
         <label>Description:</label>
         <input
           type="text"
-          value={newDescripton}
+          value={newDescription}
           onChange={handleDescriptionChange}
         />
       </div>

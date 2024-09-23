@@ -1,3 +1,5 @@
+import React from 'react'
+import { addUser } from '../apis/users.ts'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated.tsx'
 import { NavGroup, NavButton } from './Styled.tsx'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -17,6 +19,34 @@ function Nav() {
   const handleSignIn = () => {
     return loginWithRedirect()
   }
+
+  const handleUserCreation = async () => {
+    if (user) {
+      const auth0Sub = user.sub
+      const userId = parseInt(auth0Sub.split('|')[1])
+
+      const newUser = {
+        authId: userId,
+
+        email: user.email,
+        name: user.nickname, // or user.name based on your data structure
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
+
+      try {
+        await addUser(newUser)
+      } catch (error) {
+        console.error('Error adding user:', error)
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    if (user) {
+      handleUserCreation()
+    }
+  }, [user])
 
   return (
     <>

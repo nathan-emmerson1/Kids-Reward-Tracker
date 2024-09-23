@@ -17,7 +17,7 @@ export async function fetchChoreById(id: number): Promise<ChoreData> {
 
 export async function deleteChore(id: number) {
   const res = await request.delete(`${baseUrl}/${id}`)
-  return res
+  return res.body
 }
 
 export async function AddChore(newChore: ChoreData) {

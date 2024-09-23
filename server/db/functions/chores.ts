@@ -3,6 +3,7 @@ import { Chore, ChoreData } from '../../../models/chores'
 
 export async function GetAllChores() {
   const chore = await db('chores').select(
+    'id as id',
     'name as name',
     'description as description',
     'frequency as frequency',
@@ -23,7 +24,9 @@ export async function AddChore(data: ChoreData) {
   return id
 }
 
-export async function deleteChore(id: number) {
+export async function deleteChore(id: number): Promise<number> {
   const chore = await db('chores').where({ id }).delete()
+
+  console.log(chore)
   return chore
 }

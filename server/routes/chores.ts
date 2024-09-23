@@ -1,7 +1,8 @@
 import { Router } from 'express'
-import checkJwt from '../auth0'
+import checkJwt, { JwtRequest } from '../auth0'
 import * as db from '../db/functions/chores'
 import { StatusCodes } from 'http-status-codes'
+import { ChoreData } from '../../models/chores'
 
 const router = Router()
 
@@ -28,7 +29,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.delete('/:id', checkJwt, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const id = Number(req.params.id)
     const removed = await db.deleteChore(id)
@@ -38,6 +39,36 @@ router.delete('/:id', checkJwt, async (req, res) => {
   } catch (err) {
     console.log(err)
     res.status(500).json({ messege: 'error removing chore' })
+  }
+})
+
+function convertCamelToSnake(choreData: ChoreData) {
+  return {
+    name: choreData.name,
+    description: choreData.description,
+    frequency: choreData.frequency,
+    created_at: choreData.createdAt, // Mapping to snake_case
+    updated_at: choreData.updatedAt, // Mapping to snake_case
+  }
+}
+
+router.post('/', async (req, res) => {
+  try {
+    const { name, description, frequency, createdAt, updatedAt } = req.body
+
+    const choreData = convertCamelToSnake({
+      name,
+      description,
+      frequency,
+      createdAt,
+      updatedAt,
+    })
+    const id = await db.AddChore(choreData)
+    res
+      .setHeader('addchore', `${req.baseUrl}/${id}`)
+      .sendStatus(StatusCodes.CREATED)
+  } catch (err) {
+    console.log(err)
   }
 })
 

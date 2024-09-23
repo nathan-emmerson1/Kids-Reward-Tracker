@@ -5,10 +5,9 @@ import * as db from '../db/functions/users'
 import * as children from '../db/functions/children'
 import { AddChore, deleteChore } from '../db/functions/chores'
 import { addReward, deleteReward } from '../db/functions/rewards'
+import { User, UserData } from '../../models/users'
 
 const router = Router()
-
-router.use(checkJwt)
 
 router.get('/', checkJwt, async (req, res) => {
   try {
@@ -33,79 +32,35 @@ router.get('/:id', checkJwt, async (req, res) => {
   }
 })
 
-router.post('/', checkJwt, async (req: JwtRequest, res) => {
+function convertCamelToSnake(userData: UserData) {
+  return {
+    auth_id: userData.authId,
+    email: userData.email,
+    name: userData.name,
+
+    created_at: userData.createdAt, // Mapping to snake_case
+    updated_at: userData.updatedAt, // Mapping to snake_case
+  }
+}
+
+router.post('/', async (req, res) => {
   try {
-    const { userId, name, createdAt, updatedAt } = req.body
-    const id = await children.addChildren({
-      userId,
+    const { authId, name, email, createdAt, updatedAt } = req.body
+
+    const userData = convertCamelToSnake({
+      authId,
+      email,
       name,
       createdAt,
       updatedAt,
     })
+    const addUser = await db.addUser(userData)
     res
-      .setHeader('addChild', `${req.baseUrl}/${id}`)
+      .setHeader('addeuser', `${req.baseUrl}/${addUser}`)
       .sendStatus(StatusCodes.CREATED)
   } catch (err) {
     console.log(err)
   }
 })
 
-router.post('/addchore', checkJwt, async (req: JwtRequest, res) => {
-  try {
-    const { name, description, frequency, createdAt, updatedAt } = req.body
-    const id = await AddChore({
-      name,
-      description,
-      frequency,
-      createdAt,
-      updatedAt,
-    })
-    res
-      .setHeader('addchore', `${req.baseUrl}/${id}`)
-      .sendStatus(StatusCodes.CREATED)
-  } catch (err) {
-    console.log(err)
-  }
-})
-
-router.post('/addreward', checkJwt, async (req: JwtRequest, res) => {
-  try {
-    const { name, description, pointsRequired, createdAt, updatedAt } = req.body
-    const id = await addReward({
-      name,
-      description,
-      pointsRequired,
-      createdAt,
-      updatedAt,
-    })
-    res
-      .setHeader('Add Reward', `${req.baseUrl}/${id}`)
-      .sendStatus(StatusCodes.CREATED)
-  } catch (err) {
-    console.log(err)
-  }
-})
-
-router.delete('/removereward/:id', checkJwt, async (req, res) => {
-  try {
-    const id = Number(req.params)
-    const reward = await deleteReward(id)
-    res.json(reward)
-  } catch (err) {
-    console.log(err)
-  }
-})
-
-router.delete('/removechore/:id', checkJwt, async (req, res) => {
-  try {
-    const id = Number(req.params.id)
-    const removed = await deleteChore(id)
-    if (removed) {
-      res.sendStatus(StatusCodes.NO_CONTENT)
-    }
-  } catch (err) {
-    console.log(err)
-    res.status(500).json({ messege: 'error removing chore' })
-  }
-})
 export default router

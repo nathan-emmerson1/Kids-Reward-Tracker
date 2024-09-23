@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import checkJwt from '../auth0'
 import * as db from '../db/functions/rewards'
+import { StatusCodes } from 'http-status-codes'
 
 const router = Router()
 
@@ -24,6 +25,24 @@ router.get('/id', checkJwt, async (req, res) => {
   } catch (error) {
     console.log(error)
     res.status(500).json({ messege: 'error getting rewards by id' })
+  }
+})
+
+router.post('/addreward', checkJwt, async (req: JwtRequest, res) => {
+  try {
+    const { name, description, pointsRequired, createdAt, updatedAt } = req.body
+    const id = await db.addReward({
+      name,
+      description,
+      pointsRequired,
+      createdAt,
+      updatedAt,
+    })
+    res
+      .setHeader('Add Reward', `${req.baseUrl}/${id}`)
+      .sendStatus(StatusCodes.CREATED)
+  } catch (err) {
+    console.log(err)
   }
 })
 

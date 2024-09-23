@@ -5,7 +5,7 @@ const rootUrl = '/api/v1/children'
 
 export async function fetchAllChildren(): Promise<Children[]> {
   const res = await request.get(rootUrl)
-  console.log(res.body)
+
   return res.body
 }
 
