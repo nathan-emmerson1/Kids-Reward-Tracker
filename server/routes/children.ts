@@ -58,4 +58,17 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.delete('/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id)
+    const removedChild = await db.deleteChildren(id)
+    if (removedChild) {
+      res.sendStatus(StatusCodes.NO_CONTENT)
+    }
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ messege: 'error removing child' })
+  }
+})
+
 export default router

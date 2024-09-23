@@ -22,5 +22,6 @@ export async function deleteChildren(id: number) {
 
 export async function addChildren(children: ChildrenData) {
   const res = await request.post(rootUrl).send(children)
+  console.log(res.body)
   return res.body
 }

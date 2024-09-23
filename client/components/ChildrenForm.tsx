@@ -10,7 +10,10 @@ function ChildrenForm() {
   const { user, isAuthenticated } = useAuth0()
   const addMutation = useMutation({
     mutationFn: (newChildren: ChildrenData) => addChildren(newChildren),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['children'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['children'] })
+      setNewName('')
+    },
   })
 
   const handleNameAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +26,6 @@ function ChildrenForm() {
     if (isAuthenticated && user) {
       const auth0Sub = user.sub
       const userId = parseInt(auth0Sub.split('|')[1])
-      console.log(userId)
 
       addMutation.mutate({
         userId: userId,
@@ -31,6 +33,7 @@ function ChildrenForm() {
         createdAt: new Date(),
         updatedAt: new Date(),
       })
+      console.log('attemting to add children', userId)
     } else {
       console.error('User is not authenticated')
     }

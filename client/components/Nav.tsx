@@ -33,6 +33,7 @@ function Nav() {
         createdAt: new Date(),
         updatedAt: new Date(),
       }
+      console.log('attemting to add email', user.email)
 
       try {
         await addUser(newUser)
