@@ -20,7 +20,7 @@ export async function deleteChildren(id: number) {
   return res
 }
 
-export async function getChildrenByUserId(userId: number) {
+export async function getChildrenByUserId(userId: number | undefined) {
   const res = await request.get(`${rootUrl}/userid/${userId}`)
   return res.body
 }

@@ -34,7 +34,7 @@ export async function getChildrenByUserId(userId: number) {
       'children.created_at as createdAt',
       'children.updated_at as updatedAt',
     )
-    .first()
+
   console.log(children)
   return children
 }
