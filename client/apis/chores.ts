@@ -20,7 +20,13 @@ export async function deleteChore(id: number) {
   return res.body
 }
 
+export async function fetchChoreByChildrenId(childrenId: number) {
+  const res = await request.get(`${baseUrl}/childrenid/${childrenId}`)
+  return res.body
+}
+
 export async function AddChore(newChore: ChoreData) {
   const res = await request.post(baseUrl).send(newChore)
-  return res.body
+  console.log(res)
+  return res
 }

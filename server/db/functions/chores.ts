@@ -4,6 +4,7 @@ import { Chore, ChoreData } from '../../../models/chores'
 export async function GetAllChores() {
   const chore = await db('chores').select(
     'id as id',
+    'children_id as childrenId',
     'name as name',
     'description as description',
     'frequency as frequency',
@@ -22,6 +23,23 @@ export async function getChoreById(id: number) {
 export async function AddChore(data: ChoreData) {
   const [id] = await db('chores').insert(data)
   return id
+}
+
+export async function getChoreByChildrenId(childrenId: number) {
+  const chore = await db('chores')
+    .join('children', 'chores.children_id', '=', 'children.id')
+    .where('children_id', childrenId)
+    .select(
+      'chores.id as id',
+      'chores.children_id as childrenId',
+      'chores.name as name',
+      'chores.description as description',
+      'chores.frequency as frequency',
+      'chores.created_at as createdAt',
+      'chores.updated_at as updatedAt',
+    )
+
+  return chore
 }
 
 export async function deleteChore(id: number): Promise<number> {

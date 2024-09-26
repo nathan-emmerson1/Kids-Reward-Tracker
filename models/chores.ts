@@ -1,5 +1,6 @@
 export interface Chore {
   id: number
+  childrenId: number
   name: string
   description: string
   frequency: 'daily' | 'weekly' | 'monthly'
@@ -9,6 +10,7 @@ export interface Chore {
 
 export interface ChoreData {
   name: string
+  childrenId: number
   description: string
   frequency: 'daily' | 'weekly' | 'monthly'
   createdAt: Date

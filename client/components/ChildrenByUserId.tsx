@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { deleteChildren, getChildrenByUserId } from '../apis/children'
-import { Children, ChildrenData } from '../../models/children'
+import { deleteChildren, getAllChildrenByUserId } from '../apis/children'
+import { Children } from '../../models/children'
+import { Link } from 'react-router-dom'
 
 interface ChildrenListProps {
   userId: number | undefined
@@ -13,7 +14,7 @@ function ChildrenListByUserId({ userId }: ChildrenListProps) {
     isError,
   } = useQuery({
     queryKey: ['children', userId],
-    queryFn: () => getChildrenByUserId(userId),
+    queryFn: () => getAllChildrenByUserId(userId),
   })
   const queryClient = useQueryClient()
   const deleteMutation = useMutation({
@@ -36,6 +37,10 @@ function ChildrenListByUserId({ userId }: ChildrenListProps) {
         {children.map((child: Children) => (
           <li key={child.id}>
             <p>Child Name:{child.name}</p>
+            <p>
+              Child Name:{' '}
+              <Link to={`/children/${child.id}/chores`}>{child.name}</Link>
+            </p>
 
             <button onClick={() => handleDelete(child.id)}>Delete</button>
           </li>

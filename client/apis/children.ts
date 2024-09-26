@@ -20,13 +20,13 @@ export async function deleteChildren(id: number) {
   return res
 }
 
-export async function getChildrenByUserId(userId: number | undefined) {
+export async function getAllChildrenByUserId(userId: number | undefined) {
   const res = await request.get(`${rootUrl}/userid/${userId}`)
   return res.body
 }
 
 export async function addChildren(children: ChildrenData) {
   const res = await request.post(rootUrl).send(children)
-  console.log(res.body)
+
   return res.body
 }

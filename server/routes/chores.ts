@@ -19,13 +19,28 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    console.log('starting oof chore by id')
     const id = Number(req.params.id)
     const chore = await db.getChoreById(id)
     res.json(chore)
     console.log(chore)
   } catch (error) {
     res.status(500).json({ messege: 'error getting by id chore' })
+  }
+})
+
+router.get('/childrenid/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id)
+
+    const chore = await db.getChoreByChildrenId(id)
+
+    res.json(chore)
+    console.log(chore)
+  } catch (err) {
+    console.log(err, 'there was a error')
+    res
+      .status(500)
+      .json({ messege: 'there was a error getting chore by children id' })
   }
 })
 
@@ -45,6 +60,7 @@ router.delete('/:id', async (req, res) => {
 function convertCamelToSnake(choreData: ChoreData) {
   return {
     name: choreData.name,
+    children_id: choreData.childrenId,
     description: choreData.description,
     frequency: choreData.frequency,
     created_at: choreData.createdAt, // Mapping to snake_case
@@ -54,10 +70,12 @@ function convertCamelToSnake(choreData: ChoreData) {
 
 router.post('/', async (req, res) => {
   try {
-    const { name, description, frequency, createdAt, updatedAt } = req.body
+    const { name, childrenId, description, frequency, createdAt, updatedAt } =
+      req.body
 
     const choreData = convertCamelToSnake({
       name,
+      childrenId,
       description,
       frequency,
       createdAt,

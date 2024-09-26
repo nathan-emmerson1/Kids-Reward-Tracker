@@ -1,4 +1,4 @@
-import ChoreForm from './ChoreForm'
+import ChoreForm from './AnotherChoreForm'
 import ChoreList from './ChoreList'
 
 function Chore() {

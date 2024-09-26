@@ -22,8 +22,7 @@ export async function addChildren(data: ChildrenData) {
   return id
 }
 
-export async function getChildrenByUserId(userId: number) {
-  console.log('hitting this end point')
+export async function getAllChildrenByUserId(userId: number) {
   const children = await db('children')
     .join('users', 'children.user_id', '=', 'users.id')
     .where('user_id', userId)

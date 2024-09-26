@@ -9,6 +9,7 @@ export interface Reward {
 
 export interface RewardData {
   name: string
+  childrenId: number
   description: string
   pointsRequired: number
   createdAt: Date
