@@ -22,6 +22,23 @@ export async function addChildren(data: ChildrenData) {
   return id
 }
 
+export async function getChildrenByUserId(userId: number) {
+  console.log('hitting this end point')
+  const children = await db('children')
+    .join('users', 'children.user_id', '=', 'users.id')
+    .where('user_id', userId)
+    .select(
+      'children.id as id',
+      'children.user_id as user_id',
+      'children.name as name',
+      'children.created_at as createdAt',
+      'children.updated_at as updatedAt',
+    )
+    .first()
+  console.log(children)
+  return children
+}
+
 export async function deleteChildren(id: number) {
   const children = await db('children').where({ id }).delete()
   return children

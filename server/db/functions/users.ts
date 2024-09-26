@@ -15,3 +15,8 @@ export async function addUser(data: User) {
   const [id] = await db('users').insert(data)
   return id
 }
+
+export async function getUserByAuthId(authId: number) {
+  const res = await db('users').where('auth_id', authId).select().first()
+  return res
+}

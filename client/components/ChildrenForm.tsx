@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { addChildren } from '../apis/children'
 import { ChildrenData } from '../../models/children'
 import { useAuth0 } from '@auth0/auth0-react'
+import { getUserWithAuthId } from '../apis/users'
 
 function ChildrenForm() {
   const [newName, setNewName] = useState('')
@@ -20,15 +21,16 @@ function ChildrenForm() {
     setNewName(e.target.value)
   }
 
-  const handleChildrenAdd = (e: React.FormEvent) => {
+  const handleChildrenAdd = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (isAuthenticated && user) {
       const auth0Sub = user.sub
-      const userId = parseInt(auth0Sub.split('|')[1])
+      const authId = parseInt(auth0Sub.split('|')[1])
+      const userId = await getUserWithAuthId(authId)
 
       addMutation.mutate({
-        userId: userId,
+        userId: userId.id,
         name: newName,
         createdAt: new Date(),
         updatedAt: new Date(),

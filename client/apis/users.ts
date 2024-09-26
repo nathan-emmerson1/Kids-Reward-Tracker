@@ -17,3 +17,9 @@ export async function addUser(data: User) {
   const res = await request.post(baseUrl).send(data)
   return res.body
 }
+
+export async function getUserWithAuthId(authId: number) {
+  const res = await request.get(`${baseUrl}/withauth/${authId}`)
+  console.log(res)
+  return res.body
+}

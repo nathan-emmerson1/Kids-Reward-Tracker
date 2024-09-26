@@ -4,6 +4,12 @@
 export async function up(knex) {
   return knex.schema.createTable('rewards', (table) => {
     table.increments('id').primary()
+    table
+      .integer('children_id')
+      .unsigned()
+      .references('id')
+      .inTable('children')
+      .onDelete('CASCADE')
     table.string('name').notNullable()
     table.text('description').notNullable()
     table.integer('points_required').notNullable()

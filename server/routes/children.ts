@@ -30,6 +30,19 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.get('/userid/:id', async (req, res) => {
+  try {
+    console.log('hitting this end point')
+
+    const id = Number(req.params.id)
+    const result = await db.getChildrenByUserId(id)
+    res.json(result)
+  } catch (err) {
+    console.log('there was a error', err)
+    res.status(500).json({ messege: 'error getting user by authId' })
+  }
+})
+
 function convertCamelToSnake(childrenData: ChildrenData) {
   return {
     user_id: childrenData.userId,

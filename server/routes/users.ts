@@ -2,14 +2,11 @@ import { Router } from 'express'
 import checkJwt, { JwtRequest } from '../auth0'
 import { StatusCodes } from 'http-status-codes'
 import * as db from '../db/functions/users'
-import * as children from '../db/functions/children'
-import { AddChore, deleteChore } from '../db/functions/chores'
-import { addReward, deleteReward } from '../db/functions/rewards'
-import { User, UserData } from '../../models/users'
+import { UserData } from '../../models/users'
 
 const router = Router()
 
-router.get('/', checkJwt, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const user = await db.getAllUser()
     res.json(user)
@@ -23,7 +20,7 @@ router.get('/', checkJwt, async (req, res) => {
 
 router.get('/:id', checkJwt, async (req, res) => {
   try {
-    const id = Number(req.params)
+    const id = Number(req.params.id)
     const user = await db.getUserById(id)
     res.json(user)
   } catch (error) {
@@ -42,6 +39,19 @@ function convertCamelToSnake(userData: UserData) {
     updated_at: userData.updatedAt, // Mapping to snake_case
   }
 }
+
+router.get('/withauth/:id', async (req, res) => {
+  try {
+    console.log('hitting this end point')
+
+    const id = Number(req.params.id)
+    const result = await db.getUserByAuthId(id)
+    res.json(result)
+  } catch (err) {
+    console.log('there was a error', err)
+    res.status(500).json({ messege: 'error getting user by authId' })
+  }
+})
 
 router.post('/', async (req, res) => {
   try {
