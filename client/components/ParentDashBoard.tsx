@@ -16,10 +16,8 @@ function ParentDashBoard() {
           const auth0Sub = user.sub
           const authId = parseInt(auth0Sub.split('|')[1])
 
-          // Fetch the user ID using authId
           const response = await getUserWithAuthId(authId)
-          setUserId(response.id) // Assuming response contains the user's ID
-          // console.log(response)
+          setUserId(response.id)
         } catch (err) {
           console.error('Error fetching user ID:', err)
           setError('Failed to fetch user data') // Set error state
@@ -29,8 +27,6 @@ function ParentDashBoard() {
 
     fetchUserId()
   }, [isAuthenticated, user])
-
-  console.log(user)
 
   if (!isAuthenticated || !user) {
     return <p>Please log in</p>

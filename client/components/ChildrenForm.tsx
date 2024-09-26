@@ -35,7 +35,6 @@ function ChildrenForm() {
         createdAt: new Date(),
         updatedAt: new Date(),
       })
-      console.log('attemting to add children', userId)
     } else {
       console.error('User is not authenticated')
     }

@@ -25,6 +25,6 @@ export async function addReward(data: RewardData) {
 
 export async function deleteReward(id: number) {
   const removed = await db('rewards').where({ id }).delete()
-  console.log(removed)
+
   return removed
 }

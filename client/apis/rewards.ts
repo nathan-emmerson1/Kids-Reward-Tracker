@@ -5,13 +5,13 @@ const baseUrl = '/api/v1/rewards'
 
 export async function fetchAllRewards(): Promise<Reward[]> {
   const res = await request.get(baseUrl)
-  console.log(res.body)
+
   return res.body
 }
 
 export async function fetchRewardById(id: number): Promise<RewardData> {
   const res = await request.get(baseUrl + `/${id}`)
-  console.log(res.body)
+
   return res.body
 }
 

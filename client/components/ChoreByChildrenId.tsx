@@ -18,7 +18,6 @@ function ChoreByChildrenId() {
     queryKey: ['children', id],
     queryFn: () => fetchChoreByChildrenId(Number(id)),
   })
-  console.log(chore)
 
   if (isLoading) return <p>Loading...</p>
 

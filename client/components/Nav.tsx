@@ -9,8 +9,6 @@ function Nav() {
   // TODO: replace placeholder user object with the one from auth0
   const { user, logout, loginWithRedirect } = useAuth0()
   user?.nickname
-  console.log(user)
-  console.log(user?.sub)
 
   const handleSignOut = () => {
     return logout()
@@ -33,7 +31,6 @@ function Nav() {
         createdAt: new Date(),
         updatedAt: new Date(),
       }
-      console.log('attemting to add email', user.email)
 
       try {
         await addUser(newUser)

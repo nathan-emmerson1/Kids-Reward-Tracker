@@ -11,7 +11,7 @@ export async function GetAllChores() {
     'created_at as createdAt',
     'updated_at as updatedAt',
   )
-  console.log(chore)
+
   return chore as Chore[]
 }
 
@@ -45,6 +45,5 @@ export async function getChoreByChildrenId(childrenId: number) {
 export async function deleteChore(id: number): Promise<number> {
   const chore = await db('chores').where({ id }).delete()
 
-  console.log(chore)
   return chore
 }

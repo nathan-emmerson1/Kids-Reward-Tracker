@@ -42,8 +42,6 @@ function convertCamelToSnake(userData: UserData) {
 
 router.get('/withauth/:id', async (req, res) => {
   try {
-    console.log('hitting this end point')
-
     const id = Number(req.params.id)
     const result = await db.getUserByAuthId(id)
     res.json(result)

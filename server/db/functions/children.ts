@@ -34,7 +34,6 @@ export async function getAllChildrenByUserId(userId: number) {
       'children.updated_at as updatedAt',
     )
 
-  console.log(children)
   return children
 }
 

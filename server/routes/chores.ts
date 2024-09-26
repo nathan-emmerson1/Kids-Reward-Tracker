@@ -10,7 +10,6 @@ router.get('/', async (req, res) => {
   try {
     const chore = await db.GetAllChores()
     res.json(chore)
-    console.log(chore)
   } catch (error) {
     console.log(error)
     res.status(500).json({ messege: 'error getting chores' })
@@ -22,7 +21,6 @@ router.get('/:id', async (req, res) => {
     const id = Number(req.params.id)
     const chore = await db.getChoreById(id)
     res.json(chore)
-    console.log(chore)
   } catch (error) {
     res.status(500).json({ messege: 'error getting by id chore' })
   }
@@ -35,7 +33,6 @@ router.get('/childrenid/:id', async (req, res) => {
     const chore = await db.getChoreByChildrenId(id)
 
     res.json(chore)
-    console.log(chore)
   } catch (err) {
     console.log(err, 'there was a error')
     res

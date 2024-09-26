@@ -20,6 +20,6 @@ export async function addUser(data: User) {
 
 export async function getUserWithAuthId(authId: number) {
   const res = await request.get(`${baseUrl}/withauth/${authId}`)
-  console.log(res)
+
   return res.body
 }

@@ -30,7 +30,7 @@ function ChoreForm() {
 
   const handleAdd = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('submit button clicked')
+
     if (isAuthenticated && user) {
       addMutation.mutate({
         name: newName,

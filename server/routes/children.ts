@@ -22,8 +22,6 @@ router.get('/:id', async (req, res) => {
     const id = Number(req.params.id)
     const children = await db.getChildrenById(id)
     res.json(children)
-
-    console.log(children)
   } catch (error) {
     console.log(error)
     res.status(500).json({ messege: 'error geting kids by id' })

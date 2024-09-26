@@ -5,13 +5,13 @@ const baseUrl = '/api/v1/chores'
 
 export async function fetchAllChores(): Promise<Chore[]> {
   const res = await request.get(baseUrl)
-  console.log(res.body)
+
   return res.body
 }
 
 export async function fetchChoreById(id: number): Promise<ChoreData> {
   const res = await request.get(baseUrl + `/${id}`)
-  console.log(res.body)
+
   return res.body
 }
 
