@@ -20,7 +20,7 @@ function ParentDashBoard() {
           setUserId(response.id)
         } catch (err) {
           console.error('Error fetching user ID:', err)
-          setError('Failed to fetch user data') // Set error state
+          setError('Failed to fetch user data')
         }
       }
     }

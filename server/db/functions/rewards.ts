@@ -23,6 +23,22 @@ export async function addReward(data: RewardData) {
   return id
 }
 
+export async function getRewardsByChildrenId(childrenId: number) {
+  const reward = await db('rewards')
+    .join('children', 'rewards.children_id', '=', 'children.id')
+    .where('children_id', childrenId)
+    .select(
+      'rewards.id as id ',
+      'rewards.children_id as childenId',
+      'rewards.name as name',
+      'rewards.description as description',
+      'rewards.points_required as pointsRequired',
+      'rewards.created_at as createdAt',
+      'rewards.updated_at as updatedAt',
+    )
+  return reward
+}
+
 export async function deleteReward(id: number) {
   const removed = await db('rewards').where({ id }).delete()
 

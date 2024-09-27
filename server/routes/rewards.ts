@@ -27,9 +27,21 @@ router.get('/id', async (req, res) => {
   }
 })
 
+router.get('/childrenid/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id)
+    const reward = await db.getRewardsByChildrenId(id)
+    res.json(reward)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json({ messege: 'error getting reward by children id' })
+  }
+})
+
 function convertCamelToSnake(rewardData: RewardData) {
   return {
     name: rewardData.name,
+    children_id: rewardData.childrenId,
     description: rewardData.description,
     points_required: rewardData.pointsRequired,
     created_at: rewardData.createdAt,
@@ -39,10 +51,18 @@ function convertCamelToSnake(rewardData: RewardData) {
 
 router.post('/', async (req, res) => {
   try {
-    const { name, description, pointsRequired, createdAt, updatedAt } = req.body
+    const {
+      name,
+      childrenId,
+      description,
+      pointsRequired,
+      createdAt,
+      updatedAt,
+    } = req.body
 
     const rewardData = convertCamelToSnake({
       name,
+      childrenId,
       description,
       pointsRequired,
       createdAt,

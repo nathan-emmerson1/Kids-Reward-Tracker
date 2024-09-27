@@ -2,8 +2,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import React, { useState } from 'react'
 import { RewardData } from '../../models/rewards'
 import { addReward } from '../apis/rewards'
+import { useParams } from 'react-router-dom'
 
 function RewardForm() {
+  const { id } = useParams()
   const [newName, setNewName] = useState('')
   const [newDescription, setNewDescription] = useState('')
   const [newPoints, setNewPoints] = useState(0)
@@ -34,6 +36,7 @@ function RewardForm() {
 
     addMutation.mutate({
       name: newName,
+      childrenId: Number(id),
       description: newDescription,
       pointsRequired: newPoints,
       createdAt: new Date(),

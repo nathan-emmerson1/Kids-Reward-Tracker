@@ -20,6 +20,12 @@ export async function addReward(reward: RewardData) {
   return res.body
 }
 
+export async function fetchRewardByChildrenId(childrenId: number) {
+  const res = await request.get(`${baseUrl}/childrenid/${childrenId}`)
+  console.log(res.body)
+  return res.body
+}
+
 export async function deleteReward(id: number) {
   const res = await request.delete(`${baseUrl}/${id}`)
   return res
