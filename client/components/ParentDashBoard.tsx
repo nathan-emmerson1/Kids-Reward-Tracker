@@ -3,6 +3,7 @@ import ChildrenListByUserId from './ChildrenByUserId'
 import { useAuth0 } from '@auth0/auth0-react'
 import { getUserWithAuthId } from '../apis/users'
 import ChildrenForm from './ChildrenForm'
+import NavBar from './OtherNavBar'
 
 function ParentDashBoard() {
   const { user, isAuthenticated } = useAuth0()
@@ -34,9 +35,10 @@ function ParentDashBoard() {
 
   return (
     <div>
+      <NavBar />
       <div>Parent dash board</div>
-      <ChildrenListByUserId userId={userId} />
       <ChildrenForm />
+      <ChildrenListByUserId userId={userId} />
     </div>
   )
 }
