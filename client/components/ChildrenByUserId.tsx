@@ -38,39 +38,57 @@ function ChildrenListByUserId({ userId }: ChildrenListProps) {
           Kiddo
         </p>
         <p className="text-base text-gray-700 md:text-lg">
-          There are the list of kids
+          Here are the list of kids
         </p>
       </div>
+
       <div className="mx-auto grid gap-10 sm:grid-cols-2 lg:max-w-screen-lg lg:grid-cols-4">
-        {children.map((child: Children) => (
-          <div key={child.id}>
-            <div className="relative mb-4 rounded pb-56 shadow lg:pb-64">
-              <img
-                className="absolute h-full w-full rounded object-cover"
-                src={childrenImage} // Ensure child.imgSrc is defined
-                alt={child.name}
-              />
-            </div>
-            <div className="flex flex-col sm:text-center">
-              <p className="text-lg font-bold">{child.name}</p>
-              <p className="mb-5 text-xs text-gray-800">{child.role}</p>
-              <div className="flex items-center space-x-3 sm:justify-center">
-                <Link
-                  to={`/children/${child.id}/chores`} // Link to child's chores
-                  className="hover:text-deep-purple-accent-400 text-gray-600 transition-colors duration-300"
-                >
-                  Chores
-                </Link>
-                <button
-                  onClick={() => handleDelete(child.id)}
-                  className="hover:text-deep-purple-accent-400 text-gray-600 transition-colors duration-300"
-                >
-                  Delete
-                </button>
+        {children.length === 0 ? (
+          <div className="col-span-full rounded-lg border border-gray-300 bg-gray-100 p-6 text-center shadow-md">
+            <p className="mb-2 text-xl font-semibold text-gray-800">
+              Add your Kiddo
+            </p>
+            <p className="text-gray-600">
+              It looks like you haven't added any kiddo yet.
+            </p>
+          </div>
+        ) : (
+          children.map((child: Children) => (
+            <div key={child.id}>
+              <div className="relative mb-4 rounded pb-56 shadow lg:pb-64">
+                <img
+                  className="absolute h-full w-full rounded object-cover"
+                  src={childrenImage}
+                  alt={child.name}
+                />
+              </div>
+              <div className="flex flex-col sm:text-center">
+                <p className="text-lg font-bold">{child.name}</p>
+                <p className="mb-5 text-xs text-gray-800">{child.role}</p>
+                <div className="flex items-center space-x-3 sm:justify-center">
+                  <Link
+                    to={`/children/${child.id}/chores`} // Link to child's chores
+                    className="hover:text-deep-purple-accent-400 text-gray-600 transition-colors duration-300"
+                  >
+                    Chores
+                  </Link>
+                  <Link
+                    to={`/reward/${child.id}/rewards`}
+                    className="hover:text-deep-purple-accent-400 text-gray-600 transition-colors duration-300"
+                  >
+                    Rewards
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(child.id)}
+                    className="hover:text-deep-purple-accent-400 text-gray-600 transition-colors duration-300"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   )

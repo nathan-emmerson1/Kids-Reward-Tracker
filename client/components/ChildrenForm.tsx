@@ -41,12 +41,30 @@ function ChildrenForm() {
   }
 
   return (
-    <form onSubmit={handleChildrenAdd}>
-      <div>
-        <label>Child's Name:</label>
-        <input type="text" value={newName} onChange={handleNameAdd} />
+    <form
+      onSubmit={handleChildrenAdd}
+      className="mx-auto max-w-md rounded-lg bg-white p-4 shadow-md"
+    >
+      <h2 className="mb-4 text-center text-xl font-bold">Add a New Kiddo</h2>
+      <div className="mb-4">
+        <label className="mb-1 block text-gray-700" htmlFor="childName">
+          Kiddo's Name:
+        </label>
+        <input
+          id="childName"
+          type="text"
+          value={newName}
+          onChange={handleNameAdd}
+          className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          placeholder="Enter child's name"
+        />
       </div>
-      <button type="submit">Add Child</button>
+      <button
+        type="submit"
+        className="w-full rounded-lg bg-teal-600 py-2 text-white transition duration-300 hover:bg-teal-500"
+      >
+        Add Child
+      </button>
     </form>
   )
 }

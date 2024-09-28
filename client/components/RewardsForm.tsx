@@ -45,39 +45,74 @@ function RewardForm() {
   }
 
   return (
-    <div>
-      <form onSubmit={handleRewardAdd}>
+    <div className="mx-auto max-w-lg rounded-lg bg-white p-6 shadow-lg">
+      <form onSubmit={handleRewardAdd} className="space-y-6">
+        {/* Reward Name Input */}
         <div>
-          <label htmlFor="name">Reward Name:</label>
+          <label
+            htmlFor="name"
+            className="mb-2 block text-lg font-medium text-gray-700"
+          >
+            Reward Name:
+          </label>
           <input
             type="text"
             id="name"
             value={newName}
             onChange={handleNameAdd}
             required
+            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+            placeholder="Enter reward name"
           />
         </div>
+
+        {/* Description Input */}
         <div>
-          <label htmlFor="description">Description:</label>
+          <label
+            htmlFor="description"
+            className="mb-2 block text-lg font-medium text-gray-700"
+          >
+            Description:
+          </label>
           <input
             type="text"
             id="description"
             value={newDescription}
             onChange={handleDescriptionAdd}
             required
+            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+            placeholder="Enter reward description"
           />
         </div>
+
+        {/* Points Input */}
         <div>
-          <label htmlFor="points">Points Required:</label>
+          <label
+            htmlFor="points"
+            className="mb-2 block text-lg font-medium text-gray-700"
+          >
+            Points Required:
+          </label>
           <input
             type="number"
             id="points"
             value={newPoints}
             onChange={handleAddPoints}
             required
+            className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-teal-500"
+            placeholder="Enter points required"
           />
         </div>
-        <button type="submit">Add Reward</button>
+
+        {/* Submit Button */}
+        <div>
+          <button
+            type="submit"
+            className="w-full rounded-lg bg-teal-600 py-3 font-bold text-white shadow-md hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          >
+            Add Reward
+          </button>
+        </div>
       </form>
     </div>
   )

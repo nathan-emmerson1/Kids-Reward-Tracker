@@ -35,8 +35,9 @@ function ParentDashBoard() {
 
   return (
     <div>
-      <NavBar />
-      <div>Parent dash board</div>
+      <div className="mb-6 rounded-lg bg-teal-600 py-4 text-center text-white shadow-lg">
+        <h1 className="text-3xl font-bold">Parent Dashboard</h1>
+      </div>
       <ChildrenForm />
       <ChildrenListByUserId userId={userId} />
     </div>

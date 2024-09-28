@@ -40,7 +40,7 @@ export async function getRewardsByChildrenId(childrenId: number) {
 }
 
 export async function deleteReward(id: number) {
-  const removed = await db('rewards').where({ id }).delete()
+  const removed = await db('rewards').where('rewards.children_id', id).delete()
 
   return removed
 }

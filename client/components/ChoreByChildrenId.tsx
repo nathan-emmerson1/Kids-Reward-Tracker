@@ -16,7 +16,7 @@ function ChoreByChildrenId() {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ['children', id],
+    queryKey: ['chores', id],
     queryFn: () => fetchChoreByChildrenId(Number(id)),
   })
   console.log(chores)

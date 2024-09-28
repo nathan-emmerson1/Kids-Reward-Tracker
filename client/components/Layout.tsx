@@ -1,11 +1,12 @@
 import { Outlet } from 'react-router-dom'
+import NavBar from './OtherNavBar'
 
 export default function Layout() {
   return (
     <>
-      <header>
-        <h1>Kids Reward Tracker</h1>
-      </header>
+      <nav>
+        <NavBar />
+      </nav>
       <main>
         <Outlet />
       </main>
