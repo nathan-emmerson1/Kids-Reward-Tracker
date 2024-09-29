@@ -7,19 +7,20 @@ import { getUserWithAuthId } from '../apis/users'
 
 function ChildrenForm() {
   const [newName, setNewName] = useState('')
+  const [newUsername, setNewUsername] = useState('') // Add username state
+  const [newPassword, setNewPassword] = useState('') // Add password state
   const queryClient = useQueryClient()
   const { user, isAuthenticated } = useAuth0()
+
   const addMutation = useMutation({
     mutationFn: (newChildren: ChildrenData) => addChildren(newChildren),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['children'] })
       setNewName('')
+      setNewUsername('')
+      setNewPassword('')
     },
   })
-
-  const handleNameAdd = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewName(e.target.value)
-  }
 
   const handleChildrenAdd = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,6 +33,8 @@ function ChildrenForm() {
       addMutation.mutate({
         userId: userId.id,
         name: newName,
+        userName: newUsername,
+        password: newPassword, // Include password in mutation
         createdAt: new Date(),
         updatedAt: new Date(),
       })
@@ -54,9 +57,35 @@ function ChildrenForm() {
           id="childName"
           type="text"
           value={newName}
-          onChange={handleNameAdd}
+          onChange={(e) => setNewName(e.target.value)}
           className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
           placeholder="Enter child's name"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="mb-1 block text-gray-700" htmlFor="username">
+          Kiddo's Username:
+        </label>
+        <input
+          id="username"
+          type="text"
+          value={newUsername}
+          onChange={(e) => setNewUsername(e.target.value)}
+          className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          placeholder="Enter child's username"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="mb-1 block text-gray-700" htmlFor="password">
+          Kiddo's Password:
+        </label>
+        <input
+          id="password"
+          type="password"
+          value={newPassword}
+          onChange={(e) => setNewPassword(e.target.value)}
+          className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          placeholder="Enter child's password"
         />
       </div>
       <button
@@ -68,4 +97,5 @@ function ChildrenForm() {
     </form>
   )
 }
+
 export default ChildrenForm

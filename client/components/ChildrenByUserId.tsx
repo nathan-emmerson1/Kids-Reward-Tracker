@@ -54,33 +54,37 @@ function ChildrenListByUserId({ userId }: ChildrenListProps) {
           </div>
         ) : (
           children.map((child: Children) => (
-            <div key={child.id}>
-              <div className="relative mb-4 rounded pb-56 shadow lg:pb-64">
+            <div
+              key={child.id}
+              className="mx-auto max-w-sm transform overflow-hidden rounded-lg bg-white shadow-lg transition duration-300 hover:scale-105 hover:shadow-2xl"
+            >
+              <div className="relative pb-56 lg:pb-64">
                 <img
-                  className="absolute h-full w-full rounded object-cover"
+                  className="absolute h-full w-full rounded-t-lg object-cover"
                   src={childrenImage}
                   alt={child.name}
                 />
               </div>
-              <div className="flex flex-col sm:text-center">
-                <p className="text-lg font-bold">{child.name}</p>
-                <p className="mb-5 text-xs text-gray-800">{child.role}</p>
-                <div className="flex items-center space-x-3 sm:justify-center">
+              <div className="p-6">
+                <h2 className="mb-2 text-2xl font-bold text-teal-600">
+                  {child.name}
+                </h2>
+                <div className="flex items-center justify-between space-x-4">
                   <Link
                     to={`/children/${child.id}/chores`} // Link to child's chores
-                    className="hover:text-deep-purple-accent-400 text-gray-600 transition-colors duration-300"
+                    className="font-semibold text-teal-500 transition duration-300 hover:text-teal-700"
                   >
                     Chores
                   </Link>
                   <Link
                     to={`/reward/${child.id}/rewards`}
-                    className="hover:text-deep-purple-accent-400 text-gray-600 transition-colors duration-300"
+                    className="font-semibold text-teal-500 transition duration-300 hover:text-teal-700"
                   >
                     Rewards
                   </Link>
                   <button
                     onClick={() => handleDelete(child.id)}
-                    className="hover:text-deep-purple-accent-400 text-gray-600 transition-colors duration-300"
+                    className="font-semibold text-red-500 transition duration-300 hover:text-red-700"
                   >
                     Delete
                   </button>

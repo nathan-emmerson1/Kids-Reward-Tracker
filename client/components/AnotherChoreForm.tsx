@@ -47,30 +47,44 @@ function ChoreForm() {
   // if (isError) return <p>Error loading children</p>
 
   return (
-    <form onSubmit={handleAdd}>
-      <div>
-        <label>Name:</label>
+    <form
+      onSubmit={handleAdd}
+      className="mx-auto max-w-lg rounded-lg bg-white p-8 shadow-lg"
+    >
+      <div className="mb-6">
+        <label className="mb-2 block font-semibold text-teal-600">Name:</label>
         <input
           type="text"
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
+          className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+          placeholder="Enter chore name"
         />
       </div>
-      <div>
-        <label>Description:</label>
+
+      <div className="mb-6">
+        <label className="mb-2 block font-semibold text-teal-600">
+          Description:
+        </label>
         <input
           type="text"
           value={newDescription}
           onChange={(e) => setNewDescription(e.target.value)}
+          className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
+          placeholder="Enter chore description"
         />
       </div>
-      <div>
-        <label>Frequency:</label>
+
+      <div className="mb-6">
+        <label className="mb-2 block font-semibold text-teal-600">
+          Frequency:
+        </label>
         <select
           value={newFrequency}
           onChange={(e) =>
             setNewFrequency(e.target.value as 'daily' | 'weekly' | 'monthly')
           }
+          className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal-600"
         >
           <option value="daily">Daily</option>
           <option value="weekly">Weekly</option>
@@ -78,7 +92,12 @@ function ChoreForm() {
         </select>
       </div>
 
-      <button type="submit">Add Chore</button>
+      <button
+        type="submit"
+        className="w-full rounded-lg bg-teal-600 px-4 py-2 text-white shadow transition duration-300 hover:bg-teal-700"
+      >
+        Add Chore
+      </button>
     </form>
   )
 }

@@ -19,7 +19,7 @@ function RewardByChildrenId() {
   console.log(reward)
   const queryClient = useQueryClient()
   const deleteMutation = useMutation({
-    mutationFn: () => deleteReward(Number(id)),
+    mutationFn: (id: number) => deleteReward(Number(id)),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['rewards'] }),
   })
 

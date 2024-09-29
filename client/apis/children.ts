@@ -30,3 +30,13 @@ export async function addChildren(children: ChildrenData) {
 
   return res.body
 }
+
+export async function fetchChildrenLogInInfo(
+  userName: string,
+  password: string,
+) {
+  const res = await request
+    .post(`${rootUrl}/login`)
+    .send({ userName, password })
+  return res.body
+}

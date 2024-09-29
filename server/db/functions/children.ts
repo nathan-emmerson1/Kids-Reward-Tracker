@@ -41,3 +41,17 @@ export async function deleteChildren(id: number) {
   const children = await db('children').where({ id }).delete()
   return children
 }
+
+export async function getChildrenLogInInfo(userName: string) {
+  const res = await db('children')
+    .where('children.username', userName)
+    .select(
+      'children.id as id',
+      'children.username as userName',
+      'children.password as password',
+      'children.user_id as userId',
+    )
+    .first()
+  console.log(res)
+  return res
+}

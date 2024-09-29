@@ -9,6 +9,8 @@ export interface Children {
 export interface ChildrenData {
   userId: number
   name: string
+  userName: string
+  password: string
   createdAt: Date
   updatedAt: Date
 }

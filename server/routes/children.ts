@@ -4,6 +4,7 @@ import * as db from '../db/functions/children'
 import { StatusCodes } from 'http-status-codes'
 import { ChildrenData } from '../../models/children'
 import Chore from '../../client/components/Chore'
+import bcrypt from 'bcrypt'
 
 const router = Router()
 
@@ -43,6 +44,8 @@ function convertCamelToSnake(childrenData: ChildrenData) {
   return {
     user_id: childrenData.userId,
     name: childrenData.name,
+    username: childrenData.userName,
+    password: childrenData.password,
 
     created_at: childrenData.createdAt, // Mapping to snake_case
     updated_at: childrenData.updatedAt, // Mapping to snake_case
@@ -51,19 +54,39 @@ function convertCamelToSnake(childrenData: ChildrenData) {
 
 router.post('/', async (req, res) => {
   try {
-    const { userId, name, createdAt, updatedAt } = req.body
+    const { userId, name, userName, password, createdAt, updatedAt } = req.body
     const childrenData = convertCamelToSnake({
       userId,
+      userName,
+      password,
+
       name,
       createdAt,
       updatedAt,
     })
+    const hashedPassword = await bcrypt.hash(childrenData.password, 10)
+    childrenData.password = hashedPassword
     const id = await db.addChildren(childrenData)
     res
       .setHeader('addChild', `${req.baseUrl}/${id}`)
       .sendStatus(StatusCodes.CREATED)
   } catch (err) {
     console.log(err)
+  }
+})
+
+router.post('/login', async (req, res) => {
+  try {
+    const { userName, password } = req.body
+    const children = await db.getChildrenLogInInfo(userName)
+    const isCorectPassword = await bcrypt.compare(password, children.password)
+    if (!isCorectPassword) {
+      return res.status(401).json({ messege: 'incorrect password' })
+    }
+    res.status(200).json({ message: 'Log in succesful', userId: children.id })
+  } catch (err) {
+    console.log(err)
+    res.status(401).json({ message: 'error with log info' })
   }
 })
 

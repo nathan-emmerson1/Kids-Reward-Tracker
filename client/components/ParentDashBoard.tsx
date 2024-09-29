@@ -32,6 +32,7 @@ function ParentDashBoard() {
   if (!isAuthenticated || !user) {
     return <p>Please log in</p>
   }
+  console.log(user.sub)
 
   return (
     <div>

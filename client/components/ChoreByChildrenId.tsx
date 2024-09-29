@@ -27,23 +27,38 @@ function ChoreByChildrenId() {
 
   return (
     <div>
-      <div>
-        {chores.map((chore: Chore) => (
-          <li key={chore.id}>
-            <div>Name:{chore.name}</div>
-            <div>Description:{chore.description}</div>
-            <div>Frequency:{chore.frequency}</div>
-            <div>
-              {' '}
-              <Link to={`/reward/${chore.childrenId}/rewards`}>
-                Manage Rewards
-              </Link>{' '}
-            </div>
-          </li>
-        ))}
+      <div className="mb-8 rounded-lg bg-teal-600 py-6 text-center text-white shadow-lg">
+        <h1 className="text-4xl font-bold tracking-wide">Chore List</h1>
+      </div>
+      <div className="mb-5">
+        <ChoreForm />
       </div>
 
-      <ChoreForm />
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {chores.map((chore: Chore) => (
+          <div
+            key={chore.id}
+            className="transform overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:scale-105 hover:shadow-xl"
+          >
+            <div className="p-6">
+              <h2 className="mb-2 text-xl font-semibold text-teal-600">
+                {chore.name}
+              </h2>
+              <p className="mb-4 text-gray-700">{chore.description}</p>
+              <div className="mb-4 text-gray-600">
+                <span className="font-bold text-teal-500">Frequency: </span>
+                {chore.frequency}
+              </div>
+              <Link
+                to={`/reward/${chore.childrenId}/rewards`}
+                className="inline-block rounded-lg bg-teal-600 px-4 py-2 text-white shadow hover:bg-teal-700"
+              >
+                Manage Rewards
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

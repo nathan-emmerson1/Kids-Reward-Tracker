@@ -24,6 +24,7 @@ function Home() {
     if (user) {
       const auth0Sub = user.sub
       const userId = parseInt(auth0Sub.split('|')[1])
+      console.log(userId)
 
       const newUser = {
         authId: userId,
