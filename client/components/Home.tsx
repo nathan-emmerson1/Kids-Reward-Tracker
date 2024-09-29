@@ -3,7 +3,7 @@ import homeImg from '../assets/images/family-children-education-with-kids-learni
 import { useAuth0 } from '@auth0/auth0-react'
 import React, { useEffect, useState } from 'react'
 import { addUser } from '../apis/users'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Home() {
   const [isOpen, setIsOpen] = useState(false)
@@ -87,6 +87,12 @@ function Home() {
                 >
                   Sign up
                 </button>
+                <Link to={'/kidslogin'}>
+                  {' '}
+                  <button className="ml-5 mt-5 w-full transform rounded-lg bg-blue-600 px-5 py-2 text-sm uppercase tracking-wider text-white transition-colors duration-300 hover:bg-blue-500 focus:bg-blue-500 focus:outline-none lg:w-auto">
+                    Kids Login
+                  </button>{' '}
+                </Link>
               </div>
             </div>
 
