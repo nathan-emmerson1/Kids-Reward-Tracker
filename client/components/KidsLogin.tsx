@@ -71,7 +71,6 @@ function KidsLogIn() {
             {loading ? 'Logging in...' : 'Log In'}
           </button>
           {error && <p className="text-center text-red-500">{error}</p>}{' '}
-          {/* Show error message */}
         </form>
       </div>
     </div>

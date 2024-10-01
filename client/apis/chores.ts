@@ -29,9 +29,11 @@ export async function updateChoreByChildrenId(
   childrenId: number,
   status: boolean,
 ): Promise<Chore> {
+  console.log('sedning status to api', { childrenId, status })
   const res = await request
     .patch(`${baseUrl}/updatechore/${childrenId}`)
     .send({ status })
+  console.log(res.body)
   return res.body
 }
 

@@ -49,7 +49,7 @@ export async function updateChoreStatusByChildrenId(
 ) {
   try {
     const chore = await db('chores')
-      .where('children_id', childrenId)
+      .where('id', childrenId)
       .update({ completed: status })
     console.log(chore)
     return chore

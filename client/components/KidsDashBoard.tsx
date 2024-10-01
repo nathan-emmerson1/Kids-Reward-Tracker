@@ -36,12 +36,9 @@ function KidsDashBoard() {
   const isLoading = isLoadingChore || isLoadingReward
   const isError = isErrorChore || isErrorReward
 
-  const handleStatusChange = (
-    choreId: number,
-    currentCompletedStatus: boolean,
-  ) => {
+  const handleStatusChange = (id: number, currentCompletedStatus: boolean) => {
     updateMutation.mutate({
-      id: choreId,
+      id: id,
       status: !currentCompletedStatus,
     })
   }
@@ -66,11 +63,12 @@ function KidsDashBoard() {
               <li
                 key={c.id}
                 className="flex transform cursor-pointer items-center justify-between rounded-lg bg-gray-100 p-4 shadow transition-transform hover:scale-105"
-                onClick={() => handleStatusChange(c.id, c.completed)}
               >
                 <span className="text-lg">{c.name}</span>
+
                 <span
                   className={`font-semibold ${c.completed ? 'text-green-600' : 'text-red-600'}`}
+                  onClick={() => handleStatusChange(c.id, c.completed)}
                 >
                   {c.completed ? 'Completed' : 'Not Completed'}
                 </span>
