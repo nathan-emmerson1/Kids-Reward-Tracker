@@ -3,6 +3,7 @@ import { IfAuthenticated, IfNotAuthenticated } from './Authenticated.tsx'
 import { useAuth0 } from '@auth0/auth0-react'
 import { NavButton } from './Styled.tsx'
 import { Link } from 'react-router-dom'
+import logo from '../assets/images/LogoKids.png'
 
 function NavBar() {
   const { user, logout, loginWithRedirect } = useAuth0()
@@ -19,13 +20,12 @@ function NavBar() {
         <div className="flex items-center justify-between">
           <a href="#">
             <img
-              className="h-6 w-auto sm:h-7"
-              src="https://merakiui.com/images/full-logo.svg"
-              alt=""
+              className="h-12 w-auto border-2 border-gray-300 sm:h-14"
+              src={logo}
+              alt="main logo"
             />
           </a>
 
-          {/* Mobile menu button */}
           <div className="flex lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}

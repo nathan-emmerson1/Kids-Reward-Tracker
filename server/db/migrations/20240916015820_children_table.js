@@ -11,6 +11,7 @@ export async function up(knex) {
       .inTable('users')
       .onDelete('CASCADE')
     table.string('name').notNullable()
+
     table.string('username').unique().notNullable()
     table.string('password').notNullable()
     table.timestamps(true, true)

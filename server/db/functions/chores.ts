@@ -33,6 +33,7 @@ export async function getChoreByChildrenId(childrenId: number) {
       'chores.id as id',
       'chores.children_id as childrenId',
       'chores.name as name',
+      'chores.completed as completed',
       'chores.description as description',
       'chores.frequency as frequency',
       'chores.created_at as createdAt',
@@ -40,6 +41,21 @@ export async function getChoreByChildrenId(childrenId: number) {
     )
 
   return chore
+}
+
+export async function updateChoreStatusByChildrenId(
+  childrenId: number,
+  status: boolean,
+) {
+  try {
+    const chore = await db('chores')
+      .where('children_id', childrenId)
+      .update({ completed: status })
+    console.log(chore)
+    return chore
+  } catch (err) {
+    return console.log('there was a errro', err)
+  }
 }
 
 export async function deleteChore(id: number): Promise<number> {

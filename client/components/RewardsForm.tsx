@@ -66,7 +66,6 @@ function RewardForm() {
           />
         </div>
 
-        {/* Description Input */}
         <div>
           <label
             htmlFor="description"
@@ -104,7 +103,6 @@ function RewardForm() {
           />
         </div>
 
-        {/* Submit Button */}
         <div>
           <button
             type="submit"

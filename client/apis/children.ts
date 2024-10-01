@@ -38,6 +38,6 @@ export async function fetchChildrenLogInInfo(
   const res = await request
     .post(`${rootUrl}/login`)
     .send({ userName, password })
-  console.log(res.body)
+
   return res.body
 }

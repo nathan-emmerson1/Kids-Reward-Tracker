@@ -6,7 +6,6 @@ import { addUser } from '../apis/users'
 import { Link, useNavigate } from 'react-router-dom'
 
 function Home() {
-  const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
 
   const { user, logout, loginWithRedirect } = useAuth0()
@@ -30,14 +29,14 @@ function Home() {
         authId: userId,
 
         email: user.email,
-        name: user.nickname, // or user.name based on your data structure
+        name: user.nickname,
         createdAt: new Date(),
         updatedAt: new Date(),
       }
 
       try {
         await addUser(newUser)
-        navigate('/parent-dashboard')
+        navigate(`/parent-dashboard`)
       } catch (error) {
         console.error('Error adding user:', error)
       }
@@ -47,7 +46,8 @@ function Home() {
   useEffect(() => {
     if (user) {
       // User is logged in, redirect to dashboard
-      navigate('/parent-dashboard')
+      console.log(user)
+      navigate(`/parent-dashboard`)
     }
   }, [user, navigate])
 
@@ -77,21 +77,21 @@ function Home() {
 
                 <button
                   onClick={handleSignIn}
-                  className="mt-6 w-full transform rounded-lg bg-blue-600 px-5 py-2 text-sm uppercase tracking-wider text-white transition-colors duration-300 hover:bg-blue-500 focus:bg-blue-500 focus:outline-none lg:w-auto"
+                  className="ml-5 mt-5 w-full transform rounded-lg bg-green-600 px-5 py-2 text-sm uppercase tracking-wider text-white transition-colors duration-300 hover:bg-green-500 focus:bg-green-500 focus:outline-none lg:w-auto"
                 >
                   Log in
                 </button>
                 <button
                   onClick={handleSignIn}
-                  className="ml-5 mt-5 w-full transform rounded-lg bg-blue-600 px-5 py-2 text-sm uppercase tracking-wider text-white transition-colors duration-300 hover:bg-blue-500 focus:bg-blue-500 focus:outline-none lg:w-auto"
+                  className="ml-5 mt-5 w-full transform rounded-lg bg-green-600 px-5 py-2 text-sm uppercase tracking-wider text-white transition-colors duration-300 hover:bg-green-500 focus:bg-green-500 focus:outline-none lg:w-auto"
                 >
                   Sign up
                 </button>
                 <Link to={'/kidslogin'}>
                   {' '}
-                  <button className="ml-5 mt-5 w-full transform rounded-lg bg-blue-600 px-5 py-2 text-sm uppercase tracking-wider text-white transition-colors duration-300 hover:bg-blue-500 focus:bg-blue-500 focus:outline-none lg:w-auto">
-                    Kids Login
-                  </button>{' '}
+                  <button className="ml-5 mt-5 w-full transform rounded-lg bg-green-600 px-5 py-2 text-sm uppercase tracking-wider text-white transition-colors duration-300 hover:bg-green-500 focus:bg-green-500 focus:outline-none lg:w-auto">
+                    Kiddo Log in
+                  </button>
                 </Link>
               </div>
             </div>

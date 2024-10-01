@@ -46,7 +46,7 @@ function ChildrenForm() {
   return (
     <form
       onSubmit={handleChildrenAdd}
-      className="mx-auto max-w-md rounded-lg bg-white p-4 shadow-md"
+      className="mx-auto max-w-md rounded-lg bg-white p-2 shadow-md"
     >
       <h2 className="mb-4 text-center text-xl font-bold">Add a New Kiddo</h2>
       <div className="mb-4">

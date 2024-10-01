@@ -32,13 +32,12 @@ function KidsLogIn() {
   })
 
   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault() // Prevent default form submission
-    setLoading(true) // Set loading state
+    e.preventDefault()
+    setLoading(true)
 
-    // Reset error state before attempting login
     setError(null)
 
-    logInMutation.mutate({ userName, password }) // Call the mutation
+    logInMutation.mutate({ userName, password })
   }
 
   return (

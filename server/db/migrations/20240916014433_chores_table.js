@@ -14,6 +14,7 @@ export async function up(knex) {
 
     table.string('description').notNullable()
     table.enu('frequency', ['daily', 'weekly', 'monthly']).notNullable()
+    table.boolean('completed').defaultTo(false)
     table.timestamps(true, true)
   })
 }

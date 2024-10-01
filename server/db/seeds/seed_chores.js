@@ -11,6 +11,7 @@ export async function seed(knex) {
       name: 'Do the dishes',
       description: 'Wash all dishes after dinner',
       frequency: 'daily',
+      completed: false,
     },
     {
       id: 2,
@@ -19,6 +20,7 @@ export async function seed(knex) {
       name: 'Clean the room',
       description: 'Tidy up the room and make the bed',
       frequency: 'weekly',
+      completed: false,
     },
     {
       id: 3,
@@ -27,6 +29,7 @@ export async function seed(knex) {
       name: 'Take out the trash',
       description: 'Dispose of all household trash',
       frequency: 'weekly',
+      completed: false,
     },
   ])
 }

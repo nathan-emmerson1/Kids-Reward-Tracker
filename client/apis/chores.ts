@@ -25,6 +25,16 @@ export async function fetchChoreByChildrenId(childrenId: number) {
   return res.body
 }
 
+export async function updateChoreByChildrenId(
+  childrenId: number,
+  status: boolean,
+): Promise<Chore> {
+  const res = await request
+    .patch(`${baseUrl}/updatechore/${childrenId}`)
+    .send({ status })
+  return res.body
+}
+
 export async function AddChore(newChore: ChoreData) {
   const res = await request.post(baseUrl).send(newChore)
   console.log(res)

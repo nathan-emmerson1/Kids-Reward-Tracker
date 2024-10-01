@@ -13,6 +13,7 @@ export async function up(knex) {
     table.string('name').notNullable()
     table.text('description').notNullable()
     table.integer('points_required').notNullable()
+
     table.timestamps(true, true)
   })
 }

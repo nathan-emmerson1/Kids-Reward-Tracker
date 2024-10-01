@@ -41,6 +41,18 @@ router.get('/childrenid/:id', async (req, res) => {
   }
 })
 
+router.patch('/updatechore/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id)
+    const { status } = req.body
+    const updateChore = await db.updateChoreStatusByChildrenId(id, status)
+    res.json(updateChore)
+  } catch (err) {
+    console.log('there was a error', err)
+    res.status(500).json({ message: 'error updating chore status ' })
+  }
+})
+
 router.delete('/:id', async (req, res) => {
   try {
     const id = Number(req.params.id)

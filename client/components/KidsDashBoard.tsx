@@ -1,13 +1,19 @@
-import { fetchChoreByChildrenId } from '../apis/chores'
+import { fetchChoreByChildrenId, updateChoreByChildrenId } from '../apis/chores'
 import { fetchRewardByChildrenId } from '../apis/rewards'
 
 import { useParams } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Chore } from '../../models/chores'
 import { Reward } from '../../models/rewards'
 
 function KidsDashBoard() {
   const { id } = useParams()
+
+  const queryClient = useQueryClient()
+  const updateMutation = useMutation({
+    mutationFn: ({ id, status }) => updateChoreByChildrenId(Number(id), status),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['chores'] }),
+  })
 
   const {
     data: chore,
@@ -30,6 +36,16 @@ function KidsDashBoard() {
   const isLoading = isLoadingChore || isLoadingReward
   const isError = isErrorChore || isErrorReward
 
+  const handleStatusChange = (
+    choreId: number,
+    currentCompletedStatus: boolean,
+  ) => {
+    updateMutation.mutate({
+      id: choreId,
+      status: !currentCompletedStatus,
+    })
+  }
+
   if (isLoading) {
     return <p>Loading...</p>
   }
@@ -46,16 +62,17 @@ function KidsDashBoard() {
         <h2 className="mb-4 text-2xl font-semibold text-gray-800">Chores</h2>
         {chore.length > 0 ? (
           <ul className="space-y-4">
-            {chore.map((c) => (
+            {chore.map((c: Chore) => (
               <li
                 key={c.id}
-                className="flex transform items-center justify-between rounded-lg bg-gray-100 p-4 shadow transition-transform hover:scale-105"
+                className="flex transform cursor-pointer items-center justify-between rounded-lg bg-gray-100 p-4 shadow transition-transform hover:scale-105"
+                onClick={() => handleStatusChange(c.id, c.completed)}
               >
                 <span className="text-lg">{c.name}</span>
                 <span
-                  className={`font-semibold ${c.status === 'Completed' ? 'text-green-600' : 'text-red-600'}`}
+                  className={`font-semibold ${c.completed ? 'text-green-600' : 'text-red-600'}`}
                 >
-                  {c.status}
+                  {c.completed ? 'Completed' : 'Not Completed'}
                 </span>
               </li>
             ))}
@@ -69,14 +86,14 @@ function KidsDashBoard() {
         <h2 className="mb-4 text-2xl font-semibold text-gray-800">Rewards</h2>
         {reward.length > 0 ? (
           <ul className="space-y-4">
-            {reward.map((r) => (
+            {reward.map((r: Reward) => (
               <li
                 key={r.id}
                 className="flex transform items-center justify-between rounded-lg bg-gray-100 p-4 shadow transition-transform hover:scale-105"
               >
                 <span className="text-lg">{r.name}</span>
                 <span className="font-semibold text-blue-600">
-                  {r.points} points
+                  {r.pointsRequired} points
                 </span>
               </li>
             ))}
