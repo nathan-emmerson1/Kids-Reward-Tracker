@@ -15,7 +15,7 @@ function ParentDashBoard() {
     async function fetchUserId() {
       if (isAuthenticated && user) {
         try {
-          const auth0Sub = user.sub
+          const auth0Sub = user?.sub
           const authId = parseInt(auth0Sub.split('|')[1])
 
           const response = await getUserWithAuthId(authId)
@@ -33,7 +33,6 @@ function ParentDashBoard() {
   if (!isAuthenticated || !user) {
     return <p>Please log in</p>
   }
-  console.log(user.sub)
 
   return (
     <div>
