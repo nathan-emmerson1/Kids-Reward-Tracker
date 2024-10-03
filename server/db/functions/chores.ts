@@ -51,7 +51,7 @@ export async function updateChoreStatusByChildrenId(
     const chore = await db('chores')
       .where('id', childrenId)
       .update({ completed: status })
-    console.log(chore)
+
     return chore
   } catch (err) {
     return console.log('there was a errro', err)

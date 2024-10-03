@@ -7,8 +7,8 @@ import { getUserWithAuthId } from '../apis/users'
 
 function ChildrenForm() {
   const [newName, setNewName] = useState('')
-  const [newUsername, setNewUsername] = useState('') // Add username state
-  const [newPassword, setNewPassword] = useState('') // Add password state
+  const [newUsername, setNewUsername] = useState('')
+  const [newPassword, setNewPassword] = useState('')
   const queryClient = useQueryClient()
   const { user, isAuthenticated } = useAuth0()
 
@@ -38,6 +38,8 @@ function ChildrenForm() {
         createdAt: new Date(),
         updatedAt: new Date(),
       })
+      if (newUsername) {
+      }
     } else {
       console.error('User is not authenticated')
     }

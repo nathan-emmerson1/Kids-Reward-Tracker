@@ -1,7 +1,6 @@
 import express from 'express'
 import * as Path from 'node:path'
 
-import fruitRoutes from './routes/fruits.ts'
 import userRoutes from './routes/users.ts'
 import childrenRoutes from './routes/children.ts'
 import choreRoutes from './routes/chores.ts'
@@ -11,7 +10,6 @@ const server = express()
 
 server.use(express.json())
 
-server.use('/api/v1/fruits', fruitRoutes)
 server.use('/api/v1/users', userRoutes)
 server.use('/api/v1/children', childrenRoutes)
 server.use('/api/v1/chores', choreRoutes)

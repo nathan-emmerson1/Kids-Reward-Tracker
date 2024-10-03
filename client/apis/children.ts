@@ -11,7 +11,7 @@ export async function fetchAllChildren(): Promise<Children[]> {
 
 export async function fetchChildrenById(id: number): Promise<ChildrenData> {
   const res = await request.get(rootUrl + `/${id}`)
-  console.log(res.body)
+
   return res.body
 }
 

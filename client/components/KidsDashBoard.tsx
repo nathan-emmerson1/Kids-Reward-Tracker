@@ -6,12 +6,18 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Chore } from '../../models/chores'
 import { Reward } from '../../models/rewards'
 
+interface UpdateChore {
+  id: number
+  status: boolean
+}
+
 function KidsDashBoard() {
   const { id } = useParams()
 
   const queryClient = useQueryClient()
   const updateMutation = useMutation({
-    mutationFn: ({ id, status }) => updateChoreByChildrenId(Number(id), status),
+    mutationFn: ({ id, status }: UpdateChore) =>
+      updateChoreByChildrenId(Number(id), status),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['chores'] }),
   })
 

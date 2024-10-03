@@ -52,6 +52,6 @@ export async function getChildrenLogInInfo(userName: string) {
       'children.user_id as userId',
     )
     .first()
-  console.log(res)
+
   return res
 }

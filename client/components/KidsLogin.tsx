@@ -27,7 +27,7 @@ function KidsLogIn() {
       setError(error?.response?.data?.message || 'Log in failed')
     },
     onSettled: () => {
-      setLoading(false) // Reset loading state
+      setLoading(false)
     },
   })
 
